@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <circle cx="1100" cy="110" r="340" fill="#58a6ff" opacity="0.06"/>
+  <circle cx="120" cy="540" r="240" fill="#3fb950" opacity="0.05"/>
+  <line x1="60" y1="112" x2="1140" y2="112" stroke="#30363d" stroke-width="1"/>
+  <text x="60" y="80" font-family="'Courier New',Courier,monospace" font-size="40" font-weight="700" fill="#58a6ff">DG.</text>
+  <text x="1140" y="80" text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="20" fill="#7d8590">dragosgrigorie.com</text>
+  <text x="60" y="272" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="700" fill="#e6edf3" letter-spacing="-2">Dragos Grigorie</text>
+  <text x="60" y="342" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#7d8590">Junior Software Engineer</text>
+  <text x="62" y="400" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#58a6ff">London, UK</text>
+  <rect x="60" y="432" width="262" height="40" rx="20" fill="rgba(88,166,255,0.12)" stroke="#30363d" stroke-width="1"/>
+  <text x="191" y="458" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="15" fill="#58a6ff">Open to opportunities</text>
+  <rect x="334" y="432" width="132" height="40" rx="20" fill="rgba(88,166,255,0.12)" stroke="#30363d" stroke-width="1"/>
+  <text x="400" y="458" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="15" fill="#58a6ff">EN · ES · RO</text>
+  <line x1="60" y1="540" x2="1140" y2="540" stroke="#30363d" stroke-width="1"/>
+  <text x="60" y="590" font-family="'Courier New',Courier,monospace" font-size="18" fill="#7d8590">github.com/DragosGreg</text>
+  <text x="1140" y="590" text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="18" fill="#7d8590">linkedin.com/in/dragos-grigorie</text>
+</svg>
