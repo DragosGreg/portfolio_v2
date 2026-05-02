@@ -32,7 +32,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 });
 
 // Typewriter
-const roles = ['Software Engineer', 'IT Engineer', 'Web Developer', 'Python Developer'];
+const roles = ['Software Engineer', 'IT Engineer', 'Cloud Engineer', 'DevOps Engineer', 'Web Developer'];
 let ri = 0, ci = 0, deleting = false;
 const roleEl = document.getElementById('roleText');
 
