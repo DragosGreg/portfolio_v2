@@ -223,6 +223,16 @@ themeToggle.addEventListener('click', () => {
   requestAnimationFrame(draw);
 })();
 
+// Clickable project cards
+document.querySelectorAll('.project-card').forEach(card => {
+  const link = card.querySelector('.project-link-icon');
+  if (!link) return;
+  card.addEventListener('click', e => {
+    if (e.target.closest('.project-link-icon')) return;
+    window.open(link.href, '_blank', 'noopener');
+  });
+});
+
 // Contact form — opens default mail client
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
