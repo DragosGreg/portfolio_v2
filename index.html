@@ -402,6 +402,9 @@
           </div>
         </div>
         <form class="contact-form" id="contactForm">
+          <input type="hidden" name="access_key" value="8aba969e-aac3-47d1-80f9-cf2b20e49554">
+          <input type="hidden" name="subject" value="New message from dragosgrigorie.com">
+          <input type="checkbox" name="botcheck" style="display:none">
           <div class="form-group">
             <input type="text" name="name" placeholder="Your name" required autocomplete="off">
           </div>
@@ -411,7 +414,7 @@
           <div class="form-group">
             <textarea name="message" rows="5" placeholder="Your message" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Send Message</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
           <p class="form-note" id="formNote"></p>
         </form>
       </div>

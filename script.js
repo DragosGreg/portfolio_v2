@@ -233,16 +233,37 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 });
 
-// Contact form — opens default mail client
-document.getElementById('contactForm').addEventListener('submit', e => {
+// Contact form — Web3Forms
+document.getElementById('contactForm').addEventListener('submit', async e => {
   e.preventDefault();
-  const data   = new FormData(e.target);
-  const name   = data.get('name');
-  const email  = data.get('email');
-  const msg    = data.get('message');
-  const body   = `Name: ${name}\nEmail: ${email}\n\n${msg}`;
-  const mailto = `mailto:dragos.grigorie.m@gmail.com?subject=Portfolio%20message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
-  document.getElementById('formNote').textContent = 'Opening your mail client…';
-  e.target.reset();
+
+  const btn  = document.getElementById('submitBtn');
+  const note = document.getElementById('formNote');
+
+  btn.disabled    = true;
+  btn.textContent = 'Sending…';
+  note.textContent = '';
+  note.style.color = '';
+
+  try {
+    const res  = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body:   new FormData(e.target)
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      note.textContent = 'Message sent! I will get back to you soon.';
+      note.style.color = '#3fb950';
+      e.target.reset();
+    } else {
+      throw new Error(data.message);
+    }
+  } catch {
+    note.textContent = 'Something went wrong. Please try emailing me directly.';
+    note.style.color = '#f85149';
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = 'Send Message';
+  }
 });
