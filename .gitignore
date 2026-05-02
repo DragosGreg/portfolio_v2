@@ -1,1 +1,30 @@
+# Vercel
 .vercel
+
+# Environment variables (NEVER commit these)
+.env
+.env.*
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+.idea/
+*.suo
+*.user
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if you ever add npm)
+node_modules/
+
+# Build output
+dist/
+build/
