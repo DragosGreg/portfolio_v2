@@ -561,6 +561,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .project-card {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -592,6 +593,13 @@ a:hover { color: var(--accent-hover); }
 .project-link-icon:hover {
   color: var(--accent);
   transform: translateY(-2px);
+}
+/* Stretch the link's clickable area over the whole card, so clicking
+   anywhere in it opens the project (the corner icon stays as a visual cue). */
+.project-link-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .project-card h3 {
