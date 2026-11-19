@@ -32,7 +32,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 });
 
 // Typewriter
-const roles = ['Software Engineer', 'IT Engineer', 'Cloud Engineer', 'DevOps Engineer', 'Web Developer'];
+const roles = ['Cloud Engineer', 'Cloud Operations Engineer', 'Problem Solver', 'Software Engineering Student'];
 let ri = 0, ci = 0, deleting = false;
 const roleEl = document.getElementById('roleText');
 
@@ -257,3 +257,94 @@ document.getElementById('contactForm').addEventListener('submit', async e => {
     btn.textContent = 'Send Message';
   }
 });
+
+// ── Enhancements: motion & interactivity ──────────
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  // Scroll progress bar + timeline fill
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+  const timeline = document.querySelector('.timeline');
+  const tlItems = timeline ? [...timeline.querySelectorAll('.timeline-item')] : [];
+
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    if (timeline) {
+      const r = timeline.getBoundingClientRect();
+      const fill = Math.max(0, Math.min(r.height, window.innerHeight * 0.6 - r.top));
+      timeline.style.setProperty('--tl', fill + 'px');
+      tlItems.forEach(it => {
+        const dot = it.querySelector('.timeline-dot');
+        it.classList.toggle('passed', dot.getBoundingClientRect().top < window.innerHeight * 0.6);
+      });
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Staggered reveal for grouped cards
+  ['.projects-grid', '.edu-grid', '.timeline'].forEach(sel => {
+    document.querySelectorAll(sel + ' > .reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 90}ms`;
+    });
+  });
+
+  // Skill tags pop in one after another
+  const tags = document.querySelectorAll('.skills-grid .tag');
+  tags.forEach((t, i) => { t.style.transitionDelay = `${i * 35}ms`; });
+  const skills = document.querySelector('.skills-grid');
+  if (skills) {
+    new MutationObserver((_, obs) => {
+      if (skills.classList.contains('visible')) {
+        setTimeout(() => tags.forEach(t => { t.style.transitionDelay = ''; }), tags.length * 35 + 500);
+        obs.disconnect();
+      }
+    }).observe(skills, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  // Animated stat counters
+  const counters = document.querySelectorAll('.stat-num');
+  const countObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      countObs.unobserve(e.target);
+      const el = e.target;
+      const m = el.textContent.trim().match(/^(\d+)(.*)$/);
+      if (!m || +m[1] > 100 || reduce) return;
+      const target = +m[1], suffix = m[2], dur = 1200, t0 = performance.now();
+      (function tick(now) {
+        const p = Math.min(1, (now - t0) / dur);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach(c => countObs.observe(c));
+
+  // Cursor spotlight on cards
+  document.querySelectorAll('.project-card, .stat-card, .timeline-content, .edu-card').forEach(card => {
+    card.classList.add('spot');
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  // 3D tilt on the profile photo
+  const photo = document.querySelector('.photo-wrap .profile-img');
+  if (photo && finePointer && !reduce) {
+    const hero = document.getElementById('hero');
+    hero.addEventListener('mousemove', e => {
+      const r = photo.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
+      const dy = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
+      photo.style.transform = `rotateY(${dx * 18}deg) rotateX(${-dy * 18}deg)`;
+    });
+    hero.addEventListener('mouseleave', () => { photo.style.transform = ''; });
+  }
+})();
